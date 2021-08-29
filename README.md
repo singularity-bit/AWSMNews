@@ -1,0 +1,2 @@
+# AWSMNews
+News portal

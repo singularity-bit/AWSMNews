@@ -2,9 +2,9 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faNewspaper,fas,faSearch } from '@fortawesome/free-solid-svg-icons'
 
-export const Navbar = (props) => {
+function Header() {
     return (
-        <nav className="navbar  sticky-top  navbar-light bg-transparent">
+        <header className="navbar  sticky-top  navbar-light bg-transparent">
             <div className="container d-flex justify-content-between  py-4 border-bottom border-1 p-0">
                 <div className="btn-toolbar d-flex align-items-center" role="toolbar">
                     <div className="btn-group ">
@@ -24,11 +24,8 @@ export const Navbar = (props) => {
                     </div>           
                 </form>
             </div>
-            <div className="container d-flex justify-content-between  py-4 border-bottom  border-dark border-2 p-0">
-
-            </div>
-                
-            
-        </nav>
+        </header>
     )
 }
+
+export default Header

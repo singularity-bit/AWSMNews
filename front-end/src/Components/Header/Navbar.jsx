@@ -6,7 +6,7 @@ import { faNewspaper,fas,faSearch } from '@fortawesome/free-solid-svg-icons'
 
 export const Navbar = (props) => {
     return (
-        <div className="sticky-top">
+        <div className="sticky-top bg-white">
         <Header></Header>
         <Menu></Menu>
         </div>

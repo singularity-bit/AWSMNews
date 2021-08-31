@@ -1,7 +1,8 @@
 import React,{useState} from 'react'
 import NewsFeed from './left-side/NewsFeed'
+import Importante from './main-side/Importante'
 
-const data=[
+const recentNews=[
     {
         time:'16:00',
         title:'Incendiile din Grecia au un impact devastator asupra albinelor. O pădure va avea nevoie de cel puțin 30 de ani ca să-și revină'
@@ -39,10 +40,19 @@ const data=[
         title:'Incendiile din Grecia au un impact devastator asupra albinelor. O pădure va avea nevoie de cel puțin 30 de ani ca să-și revină'
     }
 ]
+const popularNews=[
+    {
+        
+    }
+]
 function Body() {
     const [activeTab, setActiveTab] = useState(0);
-    const [news,setNews]=useState(data);
+    const [news,setNews]=useState(recentNews);
 
+    const onSelectTab=(tab,news)=>{
+        setActiveTab(tab);
+        setNews(news);
+    }
     return (
         <div class="my-4 container">
             <div class="row gx-3 ">
@@ -51,13 +61,13 @@ function Body() {
                     <li className="nav-item ">
                         <a className={activeTab==0?"nav-link fs-5 fw-bold text-dark":"nav-link fs-5 fw-bold text-black-50"} 
                             aria-current="page" href="#" 
-                            onClick={()=>{setActiveTab(0)}}
+                            onClick={()=>{onSelectTab(0,recentNews)}}
                         >Noi</a>
                     </li>
                     <li className="nav-item">
                         <a className={activeTab==1?"nav-link fs-5 fw-bold text-dark":"nav-link fs-5 fw-bold text-black-50"} 
                         href="#" 
-                        onClick={()=>{setActiveTab(1)}}
+                        onClick={()=>{onSelectTab(1,popularNews)}}
                         >Populare</a>
                     </li>
                 </ul>
@@ -66,8 +76,8 @@ function Body() {
                 </div>
                 
                 </div>
-                <div class="col  bg-primary">
-                Second in DOM, unordered
+                <div class="col">
+                <Importante></Importante>
                 </div>
                 <div class="col col-lg-4 bg-info">
                 Third in DOM, ordered first

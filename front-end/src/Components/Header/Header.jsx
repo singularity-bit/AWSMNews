@@ -4,8 +4,8 @@ import { faNewspaper,fas,faSearch } from '@fortawesome/free-solid-svg-icons'
 
 function Header() {
     return (
-        <header className="navbar  sticky-top  navbar-light bg-transparent">
-            <div className="container d-flex justify-content-between  py-4 border-bottom border-1 p-0">
+        <header className="navbar  sticky-top  navbar-light p-0">
+            <div className="container d-flex justify-content-between  py-3 border-bottom border-1 p-0">
                 <div className="btn-toolbar d-flex align-items-center" role="toolbar">
                     <div className="btn-group ">
                         <button type="button" class="btn btn-dark rounded-0 m-0"><span class="font-monospace fw-bolder p-3">SUBSCRIBE</span></button>

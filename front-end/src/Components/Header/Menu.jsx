@@ -1,27 +1,35 @@
 import React,{useState} from 'react'
+import { Link } from 'react-router-dom'
+import './Menu.css'
 const menuList=[
     {
         title:"News",
+        categories:["Justitie","Social","Extern","Politic","Economic","Diverse","Comunicate de presa"],
         expanded:false
     },
     {
         title:"Investigations",
+        categories:["Ancheta","Dosar","Povesti din spatele investigatiei"],
         expanded:false
     },
     {
         title:"Video",
+        categories:["Anchete","Reportaj","Vox","Stop-cadru"],
         expanded:false
     },
     {
         title:"Special Reports",
+        categories:["Reportaje","Oameni","Fotoreportaje","Interviuri"],
         expanded:false
     },
     {
         title: "Blog",
+        categories:["Podcast","Diaspora","Editoriale","Diverse"],
         expanded:false
     },
     {
         title:"Consultant",
+        categories:["Juridic","Politic","Social"],
         expanded:false
     },
     {
@@ -33,33 +41,25 @@ function Menu() {
     
     const [expanded, setExpanded] = useState(menuList)
 
-    const expandDropdown=(index)=>{
-        //mutating the list
-        let items=[...expanded];
-        let item={...items[index]};
-        item.expanded=!item.expanded;
-        items[index]=item;
-        setExpanded(items)
-    }
-
     //displaying the menu list
     const showList=(list)=>{
         return list.map((item,index)=>{
+            
             return (
-                <li className="nav-item dropdown px-3" key={index}>
+                <li className="nav-item dropdown px-3 rounded-0" key={index}>
                 <a className="nav-link dropdown-toggle fw-bolder fs-6 text-dark" 
                     href="#" id="navbarDarkDropdownMenuLink" 
-                    role="button" 
+                    role="button"
                     data-bs-toggle="dropdown" 
                     aria-expanded="true"
-                    onClick={()=>{expandDropdown(index)}} 
+                    
                 >
                     {item.title}
                 </a>
-                <ul className={item.expanded?"dropdown-menu show":"dropdown-menu"} aria-labelledby="navbarDarkDropdownMenuLink">
-                    <li><a className="dropdown-item" href="#">Action</a></li>
-                    <li><a className="dropdown-item" href="#">Another action</a></li>
-                    <li><a className="dropdown-item" href="#">Something else here</a></li>
+                <ul className={item.categories?"dropdown-menu":""} aria-labelledby="navbarDarkDropdownMenuLink">
+                    {item.categories?.map((category,index)=>{                       
+                        return <li key={index}><a className={item.categories.length==index+1?"dropdown-item ":"dropdown-item border-bottom"} href="#">{category}</a></li>
+                    })}
                 </ul>
             </li>
             )

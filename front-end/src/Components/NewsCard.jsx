@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-import withNewsCard from '../HOC/withNewsCard'
+import WithNewsCard from '../HOC/withNewsCard'
 
 function NewsCard({type,article}) {
 

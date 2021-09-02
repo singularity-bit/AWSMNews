@@ -1,14 +1,12 @@
 import React from 'react'
 import  './newsfeed.css'
-function NewsFeed({tab}) {
+import NewsCard from '../../NewsCard'
+function NewsFeed({tab,type}) {
 
     const newsList=()=>{
         return tab.map((item,index)=>{
             return (
-                <div className="w-100 mb-4 " key={index}>
-                    <small className="text-muted fw-bold">{item.time}</small>
-                    <h5 className="mb-1 fw-bold">{item.title}</h5>
-                </div>
+                <NewsCard type={type} article={item} key={index}/>
             )
         })
     }

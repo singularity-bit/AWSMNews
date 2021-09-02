@@ -4,35 +4,42 @@ import './Menu.css'
 const menuList=[
     {
         title:"News",
+        path:'/news',
         categories:["Justitie","Social","Extern","Politic","Economic","Diverse","Comunicate de presa"],
         expanded:false
     },
     {
+        path:'/investigations',
         title:"Investigations",
         categories:["Ancheta","Dosar","Povesti din spatele investigatiei"],
         expanded:false
     },
     {
+        path:'/video',
         title:"Video",
         categories:["Anchete","Reportaj","Vox","Stop-cadru"],
         expanded:false
     },
     {
+        path:'/special',
         title:"Special Reports",
         categories:["Reportaje","Oameni","Fotoreportaje","Interviuri"],
         expanded:false
     },
     {
+        path:'/blog',
         title: "Blog",
         categories:["Podcast","Diaspora","Editoriale","Diverse"],
         expanded:false
     },
     {
+        path:'/consultant',
         title:"Consultant",
         categories:["Juridic","Politic","Social"],
         expanded:false
     },
     {
+        path:'/about',
         title:"About",
         expanded:false
     } 
@@ -47,7 +54,7 @@ function Menu() {
             
             return (
                 <li className="nav-item dropdown px-3 rounded-0" key={index}>
-                <a className="nav-link dropdown-toggle fw-bolder fs-6 text-dark" 
+                <Link to={item.path} className="nav-link dropdown-toggle fw-bolder fs-6 text-dark" 
                     href="#" id="navbarDarkDropdownMenuLink" 
                     role="button"
                     data-bs-toggle="dropdown" 
@@ -55,10 +62,10 @@ function Menu() {
                     
                 >
                     {item.title}
-                </a>
+                </Link>
                 <ul className={item.categories?"dropdown-menu":""} aria-labelledby="navbarDarkDropdownMenuLink">
                     {item.categories?.map((category,index)=>{                       
-                        return <li key={index}><a className={item.categories.length==index+1?"dropdown-item ":"dropdown-item border-bottom"} href="#">{category}</a></li>
+                        return <li key={index}><a className={item.categories.length===index+1?"dropdown-item ":"dropdown-item border-bottom"} href="#">{category}</a></li>
                     })}
                 </ul>
             </li>

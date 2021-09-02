@@ -61,4 +61,4 @@ function NewsCard({type,article}) {
     }
 }
 
-export default withNewsCard(NewsCard)
+export default WithNewsCard(NewsCard)

@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-import NewsFeed from '../Components/Body/left-side/NewsFeed'
+import NewsFeed from '../Components/left-side/NewsFeed'
 import NewsFeedTemplate from '../Components/NewsFeedTemplate'
 const recentNews=[
     {

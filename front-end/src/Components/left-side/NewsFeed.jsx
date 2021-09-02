@@ -1,6 +1,6 @@
 import React from 'react'
 import  './newsfeed.css'
-import NewsCard from '../../NewsCard'
+import NewsCard from '../NewsCard'
 function NewsFeed({tab,type}) {
 
     const newsList=()=>{

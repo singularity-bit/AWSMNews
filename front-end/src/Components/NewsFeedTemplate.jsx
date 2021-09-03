@@ -1,23 +1,20 @@
 import React from 'react'
 import WithNewsFeed from '../HOC/withNewsFeed'
 import NewsCard from './NewsCard'
+import { Link } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 function NewsFeedTemplate({type,data}) {
-    let columns=[];
+    
+    
 
     //generates an row after each 3 column
     const generateColumn=(style,news)=>{
-        news.forEach((item,index)=>{
-            columns.push(
-                <div className="col py-3" key={index}>
+        return news.map(item=>{
+            return (
+                <div className="row py-4" key={uuidv4()}>
                     <NewsCard article={item} type={style}></NewsCard>
                 </div>
             )
-            if(index % 3 ===0 ){
-                columns.push(
-                    <div className="row" key={uuidv4()}> </div>
-                )     
-            }
         })
     }
     const newsType=(style,news)=>{
@@ -75,12 +72,10 @@ function NewsFeedTemplate({type,data}) {
                 </div>
             )
         }else{
-            generateColumn(style,news);
+            
             return (
                 <div className="container bg-transparent">
-                <div className="row">
-                {columns}
-                </div>
+                    {generateColumn(style,news)}
                 </div>
             )
             

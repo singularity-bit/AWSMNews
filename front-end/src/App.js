@@ -3,7 +3,7 @@ import { BrowserRouter as Router,Route,Switch } from 'react-router-dom';
 import {Navbar} from './Components/Header/Navbar';
 import Home from './Pages/Home'
 import News from './Pages/News';
-
+import Article from './Pages/Article';
 
 
 
@@ -16,8 +16,11 @@ function App() {
               <Route exact path="/">
                 <Home/>
               </Route>
-              <Route path='/news'>
+              <Route exact path='/news' >
                 <News/>
+              </Route>
+              <Route path='/news/:article'>
+                <Article/>
               </Route>
             </Switch>
             

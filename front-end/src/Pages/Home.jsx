@@ -1,6 +1,8 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import NewsFeed from '../Components/left-side/NewsFeed'
 import NewsFeedTemplate from '../Components/NewsFeedTemplate'
+import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
+import axios from 'axios'
 const recentNews=[
     {
         time:'16:00',
@@ -114,12 +116,22 @@ const BREAKING=[
 function Body() {
     const [activeTab, setActiveTab] = useState(0);
     const [news,setNews]=useState(recentNews);
+
+    const [dummy,setDummy]=useState('')
     const [recommendedNews,setRecommendedNews]=useState(RecommendedNews);
     const [breakingNews,setBreakingNews]=useState(BREAKING)
     const onSelectTab=(tab,news)=>{
         setActiveTab(tab);
         setNews(news);
     }
+
+    useEffect(()=>{
+        axios.get('http://localhost:3001/get-articles')
+            .then(res=>{
+                let data=res.data;
+                setDummy(data)
+            })
+    },[])
     const Recommended=NewsFeedTemplate;
     const ImportantNews=NewsFeedTemplate;
     return (
@@ -151,7 +163,7 @@ function Body() {
                 </div>
 
                 <div className="col col-lg-4 col-sm-4 order-3 " style={{backgroundColor:'#FFFCDF'}}>
-                <Recommended data={recommendedNews} type='recomended'></Recommended>
+                <Recommended data={dummy} type='recomended'></Recommended>
                 </div>
             </div>
         </div>

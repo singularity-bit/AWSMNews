@@ -1,5 +1,6 @@
 import React from 'react'
 import WithNewsFeed from '../HOC/withNewsFeed'
+import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
 import NewsCard from './NewsCard'
 import { Link } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';

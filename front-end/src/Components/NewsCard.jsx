@@ -1,5 +1,7 @@
 import React,{useState} from 'react'
 import WithNewsCard from '../HOC/withNewsCard'
+import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
+
 import './NewsCard.css'
 import { useHistory,useParams } from "react-router-dom";
 
@@ -27,15 +29,15 @@ function NewsCard({type,article}) {
                 </p>
                 {
                     type==='recomended' &&
-                    <h5 className="card-title fw-bold">{article.title}</h5>
+                    <h5 className="card-title fw-bold">{article?.title}</h5>
                 }
                 {
                     type==='sidebar' &&
-                    <h6 className="card-title fw-bold">{article.title}</h6>   
+                    <h6 className="card-title fw-bold">{article?.title}</h6>   
                 }
                 {
-                    article.content &&
-                    <p className="card-text overflow-hidden truncate ">{article.content}</p>                          
+                    article?.content &&
+                    <p className="card-text overflow-hidden truncate ">{ReactHtmlParser(article?.content)}</p>                          
                 }
             </div>
         </div>

@@ -1,6 +1,6 @@
 import React from 'react'
 import WithNewsFeed from '../HOC/withNewsFeed'
-import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
+
 import NewsCard from './NewsCard'
 import { Link } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
@@ -19,7 +19,6 @@ function NewsFeedTemplate({type,data}) {
         })
     }
     const newsType=(style,news)=>{
-        
         if(style==='main'){
             return (
                 <div className="container bg-transparent">
@@ -57,17 +56,17 @@ function NewsFeedTemplate({type,data}) {
                     </div>
                     <div className="row">
                         <div className="col">
-                                <NewsCard article={news[1]} type={style}></NewsCard>
+                        <NewsCard article={news[1]} type={style}></NewsCard>
                         </div>
                     </div>
                     <div className="row">
                         <div className="col">
-                            <NewsCard article={news[2]} type={style}></NewsCard>
+                        <NewsCard article={news[2]} type={style}></NewsCard>
                         </div>
                     </div>
                     <div className="row">
                         <div className="col">
-                            <NewsCard article={news[3]} type={style}></NewsCard>
+                        <NewsCard article={news[3]} type={style}></NewsCard>
                         </div>
                     </div>
                 </div>

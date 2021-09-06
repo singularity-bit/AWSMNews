@@ -1,7 +1,6 @@
 import React,{useState} from 'react'
 import WithNewsCard from '../HOC/withNewsCard'
-import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
-
+import parse from 'html-react-parser';
 import './NewsCard.css'
 import { useHistory,useParams } from "react-router-dom";
 
@@ -37,7 +36,7 @@ function NewsCard({type,article}) {
                 }
                 {
                     article?.content &&
-                    <p className="card-text overflow-hidden truncate ">{ReactHtmlParser(article?.content)}</p>                          
+                    <p className="card-text overflow-hidden truncate ">{parse(article?.content)}</p>                          
                 }
             </div>
         </div>
@@ -67,7 +66,6 @@ function NewsCard({type,article}) {
         </div>
         )
     }
-
     if(type==='news'){
         return horizontalCard(article);
     }else{

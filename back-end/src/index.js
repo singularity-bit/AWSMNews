@@ -27,8 +27,8 @@ app.get('/', (req, res) => {
 })
 
 app.post('/post-article',(req,res)=>{
-  const {title,image,content,authors,tag,type}=req.body.data
-  console.log("what received",image)
+  const {title,image,content,authors,tag,type}=req.body
+  console.log("what received",req.body)
   const article=new Article({
     title:title,
     image:image,
@@ -44,6 +44,22 @@ app.post('/post-article',(req,res)=>{
 
 app.get('/get-articles',(req,res)=>{
   Article.find()
+    .then(result=>res.send(result))
+    .catch(err=>res.send(err))
+})
+app.get('/breaking',(req,res)=>{
+  Article.where('type','BREAKING')
+    .then(result=>res.send(result))
+    .catch(err=>res.send(err))
+})
+
+app.get('/recommended',(req,res)=>{
+  Article.where('type','RECOMMENDED')
+    .then(result=>res.send(result))
+    .catch(err=>res.send(err))
+})
+app.get('/latest',(req,res)=>{
+  Article.find().sort({createdAt:'desc'})
     .then(result=>res.send(result))
     .catch(err=>res.send(err))
 })

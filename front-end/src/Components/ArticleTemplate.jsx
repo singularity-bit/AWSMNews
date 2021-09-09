@@ -1,16 +1,16 @@
 import React,{useState} from 'react'
-import NewsCard from './NewsCard'
 import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
-
+import WithNewsCard from '../HOC/withNewsCard'
+import StandardCard from './Cards/StandardCard';
 function ArticleTemplate({type,article}) {
+
+     //wrapping newscard with HOC
+    const Card=WithNewsCard(StandardCard)
     return (
         <div className="container">
             <div className="row">
                 <div className="col">
-                    <NewsCard type={type} article={article}/>
-                    <div >
-                        {article.content}
-                    </div>
+                    <Card type={type} article={article}/>
                 </div>
             </div>
         </div>

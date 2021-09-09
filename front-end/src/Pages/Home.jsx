@@ -1,8 +1,8 @@
 import React,{useState,useEffect} from 'react'
-import NewsFeed from '../Components/left-side/NewsFeed'
-import NewsFeedTemplate from '../Components/NewsFeedTemplate'
 
+import NewsFeedTemplate from '../Components/NewsFeedTemplate'
 import axios from 'axios'
+
 
 function Body() {
     const [activeTab, setActiveTab] = useState(0);
@@ -14,6 +14,7 @@ function Body() {
         setLatest(news);
     }
 
+    //fetch data
     useEffect(()=>{
         axios.get('http://localhost:3001/recommended')
             .then(res=>{
@@ -33,8 +34,7 @@ function Body() {
             setLatest(data);
         }).catch(err=>console.log(err))
     },[])
-    const Recommended=NewsFeedTemplate;
-    const ImportantNews=NewsFeedTemplate;
+
     return (
         <div className="my-4 container">
             <div className="row gx-3 ">
@@ -56,15 +56,15 @@ function Body() {
                         </li>
                     </ul>
                     <div className="container-fluid p-0  ">
-                    {latest.length>0? <NewsFeed tab={latest} type='sidebar'></NewsFeed> : ""}
+                    {latest.length>0? <NewsFeedTemplate data={latest} type='sidebar'></NewsFeedTemplate> : ""}
                     </div>
                 </div>
                 <div className="col-lg-6 col-sm-4 order-2">
-                {breakingNews.length>0? <ImportantNews data={breakingNews} type='main'></ImportantNews> : ""}
+                {breakingNews.length>0? <NewsFeedTemplate data={breakingNews} type='main'></NewsFeedTemplate> : ""}
                 </div>
 
                 <div className="col col-lg-4 col-sm-4 order-3 " style={{backgroundColor:'#FFFCDF'}}>
-                {recommendedNews.length>0?<Recommended data={recommendedNews} type='recomended'></Recommended>:"loading..."} 
+                {recommendedNews.length>0?<NewsFeedTemplate data={recommendedNews} type='recomended'></NewsFeedTemplate>:"loading..."} 
                 </div>
             </div>
         </div>

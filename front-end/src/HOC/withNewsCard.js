@@ -1,5 +1,4 @@
 import React from 'react'
-import StandardCard from '../Components/Cards/StandardCard';
 import HorizontalCard from '../Components/Cards/HorizontalCard';
 
 function WithNewsCard(Component) {
@@ -25,7 +24,7 @@ function WithNewsCard(Component) {
         if(props.type==='news'){
             return <HorizontalCard {...props}/>
         }
-        return <StandardCard  {...props}/>
+        return <Component  {...props}/>
     };
 }
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useHistory,useParams } from "react-router-dom";
-import parse from 'html-react-parser';
+import Truncate from 'react-truncate';
 
 function StandardCard({type,article}) {
 
@@ -32,8 +32,11 @@ function StandardCard({type,article}) {
                     <h6 className="card-title fw-bold">{article?.title}</h6>   
                 }
                 {
-                    article.content &&
-                    <p className="card-text overflow-hidden truncate ">{parse(article?.content)}</p>                          
+                    type!=='sidebar' &&
+                    <p className="card-text overflow-hidden truncate ">
+                        <Truncate lines={4} ellipsis={<span>...</span>}>
+                            {article.content}
+                        </Truncate></p>                          
                 }
             </div>
         </div>

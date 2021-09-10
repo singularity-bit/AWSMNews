@@ -1,19 +1,35 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import MainNews from '../Components/FeedTemplate/MainNews';
-import RecommendedNews from '../Components/FeedTemplate/RecommendedNews'
+import axios from 'axios';
 import SidebarFeed from '../Components/FeedTemplate/SidebarFeed';
 import CategoryNews from '../Components/FeedTemplate/CategoryNews';
-function WithNewsFeed(Component){
-    return function WithNewsFeedComponent({...data}){
+function WithNewsFeed(Component,requestUrl){
+    return function WithNewsFeedComponent({...props}){
 
-        let items={...data}
+        const [news,setNews]=useState([])
+        const [isLoading,setIsLoading]=useState(true)
+        const [isError,setIsError]=useState('')
+
+        let items={...props}
         const type=items.style
-        if(type==='main'){
-            return <MainNews  {...data}/>
-        }else if (type==='sidebar'){
-            return <SidebarFeed  {...data}/>
-        }else if (type==='recommended') return <RecommendedNews  {...data}/>
-        else  return <CategoryNews  {...data}/>
+       
+        useEffect(()=>{
+            requestUrl && axios.get(requestUrl)
+                .then(res=>{
+                    setNews(res.data)
+                    setIsLoading(false)
+                }).catch(err=>setIsError(err))
+        },[])
+
+        switch(type){
+            case 'main' : return <MainNews data= {news} isLoading={isLoading} {...props}/>
+
+            case 'sidebar' : return <SidebarFeed  data= {news} isLoading={isLoading} {...props}/>
+
+            case  'recommended' : return <Component   data= {news} isLoading={isLoading} {...props}/>
+
+            default : return <CategoryNews   data= {news} isLoading={isLoading} {...props}/>
+        }
     };
 }
 export default WithNewsFeed;

@@ -1,12 +1,13 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import StandardCard from '../Cards/StandardCard'
 import WithNewsCard from '../../HOC/withNewsCard'
 
 const Card=WithNewsCard(StandardCard)
 
-function MainNews({data,type}) {
+function MainNews({data,type,isLoading}) {
 
     return (
+                !isLoading ? 
                 <div className="container bg-transparent">
                     <div className="row">
                         <div className="col">
@@ -29,7 +30,8 @@ function MainNews({data,type}) {
                             <Card article={data[4]} type={type}></Card>
                         </div>
                     </div>
-                </div>
+                </div> :
+                <p>data is fetching...</p>
     )
 }
 

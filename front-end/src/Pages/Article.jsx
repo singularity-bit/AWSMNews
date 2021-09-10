@@ -2,6 +2,7 @@ import React,{useState,useEffect} from 'react'
 import { useLocation } from "react-router-dom";
 import WithNewsCard from '../HOC/withNewsCard'
 import StandardCard from '../Components/Cards/StandardCard';
+import ArticleTemplate from '../Components/ArticleTemplate';
 
 const BREAKING=[
     {
@@ -61,7 +62,7 @@ function Article(props) {
         <div className="container">
             <div className="row">
                 <div className="col">
-                    <Card type={`highlight`} article={article}/>
+                    <ArticleTemplate article={article}/>
                 </div>
             </div>
         </div>

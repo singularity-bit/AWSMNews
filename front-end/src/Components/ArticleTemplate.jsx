@@ -1,7 +1,4 @@
-import React,{useState} from 'react'
-
-import WithNewsCard from '../HOC/withNewsCard'
-import StandardCard from './Cards/StandardCard';
+import React from 'react'
 import parse from 'html-react-parser';
 
 function ArticleTemplate({article}) {

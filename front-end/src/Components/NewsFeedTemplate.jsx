@@ -12,7 +12,7 @@ function NewsFeedTemplate({type,requestUrl}) {
                     {type!=='sidebar'&& type}
                 </h5>
             </div>
-            <News style={type} />
+            <News style={type} type={type} />
         </div>
     )
 }

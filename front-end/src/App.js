@@ -22,6 +22,9 @@ function App() {
               <Route path='/news/:article'>
                 <Article/>
               </Route>
+              <Route path='/recommended/:article'>
+                <Article/>
+              </Route>
               <Route path='/create-article'>
                 <CreateArticle/>
               </Route>

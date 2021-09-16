@@ -47,6 +47,12 @@ app.get('/get-articles',(req,res)=>{
     .then(result=>res.send(result))
     .catch(err=>res.send(err))
 })
+app.get('/news/:article',(req,res)=>{
+  let articleTitle=req.params.article
+  Article.findOne({title:articleTitle})
+    .then(result=>res.send(result))
+    .catch(err=>res.send(err))
+})
 app.get('/breaking',(req,res)=>{
   Article.where('type','BREAKING')
     .then(result=>res.send(result))

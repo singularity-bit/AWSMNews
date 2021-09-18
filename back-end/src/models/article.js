@@ -16,10 +16,8 @@ const articleSchema= new Schema({
     },
     authors:[
         {
-            name:{
-                type:String,
-                required:true
-            }
+            type:String,
+            required:true
         }
     ],
     tag:{

@@ -18,8 +18,10 @@ function Article() {
     `;
 
     useEffect(()=>{
+        //decode the URI in plain text
         let articleTitle=decodeURIComponent(article)
-        
+        console.log("title",articleTitle);
+        //fetch article by title
         axios.get(`http://localhost:3001/news/${articleTitle}`)
             .then(result=>{
                 setnewsArticle(result.data);
@@ -35,8 +37,7 @@ function Article() {
                 <div className="col">
                 {isLoading?
                     <PuffLoader color={color} loading={isLoading} css={override} size={60}/>:
-                    <ArticleTemplate article={newsArticle}/>
-                     
+                    <ArticleTemplate article={newsArticle}/>                     
                     }                
                 </div>
             </div>

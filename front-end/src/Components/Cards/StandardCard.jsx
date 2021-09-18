@@ -30,7 +30,7 @@ function StandardCard({type,article}) {
                 </p>
                 {
                     type==='recommended' || type==='main'?
-                    <Link to={`recommended/${titleUrl}`} className="text-decoration-none text-reset">
+                    <Link to={`news/${titleUrl}`} className="text-decoration-none text-reset">
                         <h5 className="card-title fw-bold ">{article.title}</h5>
                     </Link>:
                     null

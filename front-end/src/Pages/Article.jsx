@@ -7,7 +7,8 @@ import PuffLoader from "react-spinners/PuffLoader";
 function Article() {
 
     //to get url params
-    let { article }=useParams()
+    let { article,category }=useParams()
+   
     const [newsArticle, setnewsArticle] = useState({})
     const [isLoading,setIsLoading]=useState(true)
     let [color, setColor] = useState("black");
@@ -20,11 +21,11 @@ function Article() {
     useEffect(()=>{
         //decode the URI in plain text
         let articleTitle=decodeURIComponent(article)
-        console.log("title",articleTitle);
         //fetch article by title
-        axios.get(`http://localhost:3001/news/${articleTitle}`)
+        axios.get(`http://localhost:3001/news/${category}/${articleTitle}`)
             .then(result=>{
-                setnewsArticle(result.data);
+                console.log("result data",result.data[0]);
+                setnewsArticle(result.data[0]);
                 setIsLoading(false)
             }
             )

@@ -1,6 +1,7 @@
 import React,{useState} from 'react'
 import { Link } from 'react-router-dom'
 import './Menu.css'
+import { v4 as uuidv4 } from 'uuid';
 const menuList=[
     {
         title:"News",
@@ -53,19 +54,22 @@ function Menu() {
         return list.map((item,index)=>{
             
             return (
-                <li className="nav-item dropdown px-3 rounded-0" key={index}>
+                <li className="nav-item dropdown px-3 rounded-0" key={uuidv4()}>
                 <Link to={item.path} className="nav-link dropdown-toggle fw-bolder fs-6 text-dark" 
-                    href="#" id="navbarDarkDropdownMenuLink" 
+                    id="navbarDarkDropdownMenuLink" 
                     role="button"
                     data-bs-toggle="dropdown" 
                     aria-expanded="true"
-                    
+                    key={uuidv4()}
                 >
                     {item.title}
                 </Link>
                 <ul className={item.categories?"dropdown-menu":""} aria-labelledby="navbarDarkDropdownMenuLink">
                     {item.categories?.map((category,index)=>{                       
-                        return <li key={index}><a className={item.categories.length===index+1?"dropdown-item ":"dropdown-item border-bottom"} href="#">{category}</a></li>
+                        return <Link to={`${item.path}/${category}`} className="text-decoration-none text-reset" key={uuidv4()}>
+                            <li key={uuidv4()}><a className={item.categories.length===index+1?"dropdown-item ":"dropdown-item border-bottom"} >{category}</a></li>
+                        </Link>
+                        
                     })}
                 </ul>
             </li>

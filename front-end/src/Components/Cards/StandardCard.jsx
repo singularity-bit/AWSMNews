@@ -6,6 +6,9 @@ function StandardCard({type,article}) {
 
     const [titleUrl, setTitleUrl] = useState('');
     
+    //gets inner text of the html tags
+    const stripedHtml=article.content.replace(/<[^>]+>/g, '');
+
     useEffect(()=>{
         setTitleUrl(encodeURIComponent(article.title)) ;
     },[])
@@ -14,12 +17,12 @@ function StandardCard({type,article}) {
             <div className="card-body px-0">
                 {
                     type==='highlight' &&
-                    <Link className="text-decoration-none text-reset" to={`news/${titleUrl}`}>
+                    <Link className="text-decoration-none text-reset" to={`news/${article.tag}/${titleUrl}`}>
                         <h1 className="card-title fw-bold">{article.title}</h1>
                     </Link>
                 }
                 {type!=='sidebar' && 
-                <Link to={`news/${titleUrl}`}>
+                <Link to={`news/${article.tag}/${titleUrl}`}>
                 <img src={article.image} className="img-thumbnail border-0 p-0 rounded-0"  alt="..."/>
                 </Link>}
                 <p className="fw-bold text-danger my-2">
@@ -30,14 +33,14 @@ function StandardCard({type,article}) {
                 </p>
                 {
                     type==='recommended' || type==='main'?
-                    <Link to={`news/${titleUrl}`} className="text-decoration-none text-reset">
+                    <Link to={`news/${article.tag}/${titleUrl}`} className="text-decoration-none text-reset">
                         <h5 className="card-title fw-bold ">{article.title}</h5>
                     </Link>:
                     null
                 }
                 {
                     type==='sidebar' &&
-                    <Link to={`news/${titleUrl}`} className="text-decoration-none text-reset">
+                    <Link to={`news/${article.tag}/${titleUrl}`} className="text-decoration-none text-reset">
                         <h6 className="card-title fw-bold ">{article.title}</h6>   
                     </Link>
                     
@@ -46,7 +49,7 @@ function StandardCard({type,article}) {
                     type!=='sidebar' &&
                     <p className="card-text overflow-hidden truncate ">
                         <Truncate lines={4} ellipsis={<span>...</span>}>
-                            {article.content}
+                            {stripedHtml}
                         </Truncate></p>                          
                 }
             </div>

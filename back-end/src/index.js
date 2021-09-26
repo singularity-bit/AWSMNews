@@ -70,18 +70,8 @@ app.get("/images/:imageName", (req, res) => {
 		.catch((err) => res.send(err));
 });
 
-app.get("/query-article", (req, res) => {
-	Article.find({
-		tag: category,
-	})
-		.then((result) => {
-			res.send(result);
-		})
-		.catch((err) => res.send(err));
-});
-
 app.post("/post-article", upload.single("image"), (req, res) => {
-	const { title, content, authors, tag, type } = req.body;
+	const { title, content, authors, tag, type, category } = req.body;
 	const url = req.protocol + "://" + req.get("host");
 	console.log("what received", req.body);
 	const article = new Article({
@@ -91,6 +81,7 @@ app.post("/post-article", upload.single("image"), (req, res) => {
 		authors: authors,
 		tag: tag,
 		type: type,
+		category: category,
 	});
 	article
 		.save()
@@ -98,27 +89,33 @@ app.post("/post-article", upload.single("image"), (req, res) => {
 		.catch((err) => res.send(err));
 });
 
-app.get("/get-articles", (req, res) => {
-	Article.find()
+app.get("/get-articles/:category", (req, res) => {
+	let category = req.params.category;
+	Article.find({
+		category: { $regex: new RegExp(category, "i") },
+	})
 		.sort({ createdAt: "desc" })
 		.then((result) => res.send(result))
 		.catch((err) => res.send(err));
 });
-app.get("/news/:category", (req, res) => {
+app.get("/news/:category/:tag", (req, res) => {
+	let tag = req.params.tag;
 	let category = req.params.category;
 	Article.find({
-		tag: category,
+		tag: { $regex: new RegExp(tag, "i") },
+		category: { $regex: new RegExp(category, "i") },
 	})
 		.then((result) => {
+			console.log("tag news", result);
 			res.send(result);
 		})
 		.catch((err) => res.send(err));
 });
-app.get("/news/:category/:article", (req, res) => {
+app.get("/article/:tag/:article", (req, res) => {
 	let articleTitle = req.params.article;
-	let category = req.params.category;
+	let tag = req.params.tag;
 	Article.find({
-		tag: category,
+		tag: { $regex: new RegExp(tag, "i") },
 		title: articleTitle,
 	})
 		.then((result) => {
@@ -149,9 +146,7 @@ app.get("/latest", (req, res) => {
 app.get("/find-article/:title", (req, res) => {
 	let { title } = req.params;
 	Article.find({
-		title: {
-			$regex: title,
-		},
+		title: { $regex: new RegExp(title, "i") },
 	})
 		.then((result) =>
 			result.length

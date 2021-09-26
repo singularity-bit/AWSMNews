@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import WithNewsCard from "../../HOC/withNewsCard";
 import StandardCard from "../Cards/StandardCard";
 import { v4 as uuidv4 } from "uuid";
@@ -7,7 +7,7 @@ import ErrorPage from "./ErrorPage";
 function CategoryNews({ data, style, isError }) {
 	const Card = WithNewsCard(StandardCard);
 	const displayData = (value) => {
-		return data.map((item) => {
+		return value.map((item) => {
 			return (
 				<div className="row py-4" key={uuidv4()}>
 					<div className="container">

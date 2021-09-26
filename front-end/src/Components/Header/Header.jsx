@@ -12,7 +12,10 @@ function Header() {
 	};
 	const onSubmit = (e) => {
 		if ((e.key === "Enter") | (e.type === "click")) {
-			history.push(query);
+			history.push({
+				pathname: `/search/${query}`,
+				state: { detail: query },
+			});
 			setQuery("");
 		}
 	};

@@ -1,12 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faNewspaper, fas, faSearch } from "@fortawesome/free-solid-svg-icons";
+import {
+	faNewspaper,
+	faSearch,
+	faSignInAlt,
+} from "@fortawesome/free-solid-svg-icons";
 import { useHistory } from "react-router-dom";
+import { ModalContext } from "../../Context/SearchContext";
 
 function Header() {
 	const [query, setQuery] = useState("");
 	const history = useHistory();
+	const { openModal, onOpenModal } = useContext(ModalContext);
 	const onSeach = (e) => {
 		setQuery(e.target.value);
 	};
@@ -20,6 +26,9 @@ function Header() {
 		}
 	};
 
+	const OpenModal = () => {
+		onOpenModal();
+	};
 	useEffect(() => {
 		setQuery("");
 	}, []);
@@ -67,6 +76,17 @@ function Header() {
 							<FontAwesomeIcon icon={faSearch}></FontAwesomeIcon>
 						</button>
 					</div>
+					<button
+						className="input-group-text bg-transparent border-0 mx-3"
+						id="basic-addon2"
+						onClick={() => OpenModal()}
+					>
+						<FontAwesomeIcon
+							icon={faSignInAlt}
+							color={"grey"}
+							size={"2x"}
+						></FontAwesomeIcon>
+					</button>
 				</div>
 			</div>
 		</header>

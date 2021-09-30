@@ -58,8 +58,7 @@ var upload = multer({
 });
 app.get("/images/:imageName", (req, res) => {
 	const url = req.protocol + "://" + req.get("host");
-	//http://localhost:3001/images/abcc9a93-c0a6-4108-9b90-ed9b2aca0120-4veehr.jpg
-	console.log("url", url + "/images/" + req.params.imageName);
+
 	Article.findOne({ image: url + "/images/" + req.params.imageName })
 		.then((result) => {
 			console.log("image path", result);
@@ -73,7 +72,7 @@ app.get("/images/:imageName", (req, res) => {
 app.post("/post-article", upload.single("image"), (req, res) => {
 	const { title, content, authors, tag, type, category } = req.body;
 	const url = req.protocol + "://" + req.get("host");
-	console.log("what received", req.body);
+
 	const article = new Article({
 		title: title,
 		image: url + "/images/" + req.file.filename,

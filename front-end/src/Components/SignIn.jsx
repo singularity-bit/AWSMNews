@@ -1,81 +1,116 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
-const SignIn = () => {
-	return (
-		<div className="position-relative">
-			<div
-				className="modal-dialog show fade modal-dialog-centered position-absolute top-0 start-0 translate-middle"
-				tabIndex="-1"
-			>
-				<div className="modal-content">
-					<div className="modal-header">
-						<button
-							type="button"
-							className="close d-flex align-items-center justify-content-center"
-							data-dismiss="modal"
-							aria-label="Close"
-						>
-							<span aria-hidden="true" className="btn-close" />
-						</button>
-					</div>
-					<div className="modal-body p-4 p-md-5">
-						<div className="icon d-flex align-items-center justify-content-center">
-							<FontAwesomeIcon icon={faUser} className="mx-2 " />
-						</div>
-						<h3 className="text-center mb-4">Sign In</h3>
+const SignIn = ({ isOpen }) => {
+  //login or registration mode
+  const [mode, setMode] = useState("login");
+  const [login, setLogin] = useState("");
+  const [password, setPassword] = useState("");
+  const [repeatPassword, setRepeatPassword] = useState("");
 
-						<form action="#" className="login-form">
-							<div className="form-group">
-								<input
-									type="text"
-									className="form-control rounded-left"
-									placeholder="Username"
-								/>
-							</div>
-							<div className="form-group d-flex">
-								<input
-									type="password"
-									className="form-control rounded-left"
-									placeholder="Password"
-								/>
-							</div>
-							<div className="form-group">
-								<button
-									type="submit"
-									className="form-control btn btn-primary rounded submit px-3"
-								>
-									Login
-								</button>
-							</div>
-							<div className="form-group d-md-flex">
-								<div className="form-check w-50">
-									<label className="custom-control fill-checkbox">
-										<input
-											type="checkbox"
-											className="fill-control-input"
-										/>
-										<span className="fill-control-indicator"></span>
-										<span className="fill-control-description">
-											Remember Me
-										</span>
-									</label>
-								</div>
-								<div className="w-50 text-md-right">
-									<a href="#">Forgot Password</a>
-								</div>
-							</div>
-						</form>
-					</div>
-					<div className="modal-footer justify-content-center">
-						<p>
-							Not a member? <a href="#">Create an account</a>
-						</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	);
+
+  const onModeChange = (value) => {
+    setMode(value);
+  };
+  const onLoginChange = (e) => {
+    setLogin(e.target.value);
+  };
+  const onPasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
+  const onRepeatPasswordChange = (e) => {
+    setRepeatPassword(e.target.value);
+  };
+  const logIn = (e) => {
+    e.preventDefault();
+    if (mode === "register" && password===repeatPassword) {
+      console.log("passowrd match")
+    }else if()
+  };
+  useEffect(() => {
+    setMode("login");
+  }, []);
+  return (
+    <div
+      className={`modal-dialog ${
+        isOpen && "show"
+      } fade modal-dialog-centered top-100 start-50 translate-middle-x position-absolute`}
+    >
+      <div className="modal-content bg-light w-400">
+        <div className="modal-body p-4 p-md-5 ">
+          <div className="icon d-flex align-items-center justify-content-center">
+            <FontAwesomeIcon icon={faUser} className="mx-2 " />
+          </div>
+          <h3 className="text-center mb-4">Sign In</h3>
+
+          <form onSubmit={(e) => logIn(e)} className="login-form">
+            <div className="form-group mb-3">
+              <input
+                type="text"
+                className="form-control rounded-left"
+                placeholder="Username"
+                onChange={onLoginChange}
+                required
+              />
+            </div>
+            <div className="form-group d-flex mb-3">
+              <input
+                type="password"
+                className="form-control rounded-left"
+                placeholder="Password"
+                onChange={onPasswordChange}
+                required
+              />
+            </div>
+            {mode === "register" && (
+              <div className="form-group d-flex mb-3">
+                <input
+                  type="password"
+                  className="form-control rounded-left"
+                  placeholder="Repeat password"
+                  onChange={onRepeatPasswordChange}
+                  required
+                />
+              </div>
+            )}
+            <div className="form-group mb-3">
+              <button
+                type="submit"
+                className="form-control btn btn-primary rounded submit px-3 text-capitalize"
+              >
+                {mode}
+              </button>
+            </div>
+          </form>
+        </div>
+        <div className="modal-footer justify-content-center">
+          {mode === "login" ? (
+            <p>
+              Not a member?{" "}
+              <button
+                type="button"
+                className="border border-primary bg-transparent"
+                onClick={() => onModeChange("register")}
+              >
+                Create an account
+              </button>
+            </p>
+          ) : (
+            <p>
+              Have account?{" "}
+              <button
+                type="button"
+                className="border border-primary bg-transparent"
+                onClick={() => onModeChange("login")}
+              >
+                Sign In
+              </button>
+            </p>
+          )}
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default SignIn;

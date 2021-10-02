@@ -5,21 +5,15 @@ import Home from "./Pages/Home";
 import News from "./Pages/News";
 import Article from "./Pages/Article";
 import CreateArticle from "./Pages/CreateArticle";
-import { ModalContext } from "./Context/SearchContext";
-import SignIn from "./Components/SignIn";
+
 
 function App() {
-	const [openModal, setOpenModal] = useState(false);
-
-	const onOpenModal = () => {
-		setOpenModal(!openModal);
-	};
+	
 	return (
 		<Router>
 			<div className="App">
-				<ModalContext.Provider value={(openModal, () => onOpenModal())}>
 					<Navbar />
-					{openModal && <SignIn />}
+					
 					<Switch>
 						<Route exact path="/">
 							<Home />
@@ -84,7 +78,6 @@ function App() {
 							<News />
 						</Route>
 					</Switch>
-				</ModalContext.Provider>
 			</div>
 		</Router>
 	);
